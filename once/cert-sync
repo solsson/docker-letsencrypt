@@ -24,6 +24,8 @@ if [ -n "${LETSENCRYPT_ENDPOINT+1}" ]; then
 fi
 
 letsencrypt certonly \
+  --standalone \
+  --standalone-supported-challenges http-01 \
   --text --renew-by-default --agree-tos \
   $domain_args \
   --email=$EMAIL
