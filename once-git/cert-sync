@@ -30,12 +30,12 @@ letsencrypt certonly \
   $domain_args \
   --email=$EMAIL
 
-if [ -d /etc/letsencrypt/.git ]; then
+if [ -d /etc/letsencrypt/transfer/.git ]; then
   export GIT_COMMITTER_NAME="Letsencrypt"
   export GIT_COMMITTER_EMAIL="$EMAIL"
-  cd /etc/letsencrypt/
-  git add archive/
-  git add live/
+  cd /etc/letsencrypt/transfer/
+  cp --dereference --recursive --force /etc/letsencrypt/live/* .
+  git add .
   git commit -m "$DOMAINS $LETSENCRYPT_ENDPOINT" --author="Letsencrypt <$EMAIL>"
   git push
 fi
