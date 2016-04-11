@@ -31,6 +31,8 @@ letsencrypt certonly \
   --email=$EMAIL
 
 if [ -d /etc/letsencrypt/live/.git ]; then
+  export GIT_COMMITTER_NAME="Letsencrypt"
+  export GIT_COMMITTER_EMAIL="$EMAIL"
   cd /etc/letsencrypt/live/
   git add .
   git commit -m "$DOMAINS $LETSENCRYPT_ENDPOINT" --author="Letsencrypt <$EMAIL>"
